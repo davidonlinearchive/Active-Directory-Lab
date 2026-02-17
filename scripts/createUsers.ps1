@@ -1,24 +1,27 @@
-ADUsers = Import-csv c:\AD-LabUsers.csv
+# Create org unit called LabUsers
+New-ADOrganizationalUnit -Name "LabUsers" -Path "DC=doa,DC=local"
 
-
+$ADUsers = Import-csv c:\AD-LabUsers.csv
 foreach ($User in $ADUsers) {
-
-Username = $user.username
-Password = $user.password
-Firstname = $user.Firstname
-Lastname = $user.Lastname
-email = $user.email
-}
-
-
-# Check if user exists
-if (Get-ADUser -F {SamAccountName -eq $Username}) {
-    Write-Warning " A User exists with that username already."
-} else {
-    New-ADUser SamAccountName $username UserPrinicipalName $Username@doa.local
-    "$Firstname $Lastname" GivenName $Firstname $Lastname Enabled $True DisplayName "$Lastname, $Firstname"
-    Path $OU City $city Company $Company State $State StreetAddress $
-    AccountPassword (convertto-securestring $Password -AsPlainText Force)
-
-
+    $Username = $User.SamAccount
+    $Password = $User.Password
+    $Firstname = $User.Firstname
+    $Lastname = $User.Lastname
+    $Path = "OU=LabUsers,DC=doa,DC=local"
+    
+    # Check if user exists
+    if (Get-ADUser -Filter {SamAccountName -eq $Username} -ErrorAction SilentlyContinue) {
+        Write-Warning "A User exists with that username already: $Username"
+    } else {
+        New-ADUser -SamAccountName $Username `
+            -UserPrincipalName "$Username@doa.local" `
+            -Name "$Firstname $Lastname" `
+            -GivenName $Firstname `
+            -Surname $Lastname `
+            -Enabled $true `
+            -DisplayName "$Lastname, $Firstname" `
+            -Path $Path `
+            -AccountPassword (ConvertTo-SecureString $Password -AsPlainText -Force) `
+            -ChangePasswordAtLogon $false
+    }
 }
