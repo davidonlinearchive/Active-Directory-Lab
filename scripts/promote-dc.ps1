@@ -4,7 +4,7 @@ Install-ADDSForest `
 -CreateDnsDelegation:$false `
 -DatabasePath "C:\Windows\NTDS" `
 -DomainMode "WinThreshold" `
--DomainName "doa.local" `
+-DomainName "doa.local" `  
 -DomainNetbiosName "DOA" `
 -ForestMode "WinThreshold" `
 -InstallDns:$true `
