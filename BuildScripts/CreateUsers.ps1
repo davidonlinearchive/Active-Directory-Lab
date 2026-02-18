@@ -4,9 +4,9 @@ New-ADOrganizationalUnit -Name "LabUsers" -Path "DC=doa,DC=local"
 $ADUsers = Import-csv c:\AD-LabUsers.csv
 foreach ($User in $ADUsers) {
     $Username = $User.SamAccount
-    $Password = $User.Password
     $Firstname = $User.Firstname
     $Lastname = $User.Lastname
+    $Password = $User.Password
     $Path = "OU=LabUsers,DC=doa,DC=local"
     
     # Check if user exists
