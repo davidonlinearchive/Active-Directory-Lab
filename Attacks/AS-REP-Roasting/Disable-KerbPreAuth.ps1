@@ -1,0 +1,1 @@
+# This Script disables 2 Domain users kerberos pre authentication, pick at random under the LabUsers OU
