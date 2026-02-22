@@ -5,7 +5,7 @@ This attack is caused by a domain user not having [Kerberos](https://en.hackndo.
 
 **Step 1 — Disable Pre-Authentication**
 
-On the domain controller, disable pre-authentication using the [Disable-KerbPreAuth.ps1](https://github.com/davidonlinearchive/Active-Directory-Lab/blob/main/Attacks/AS-REP-Roasting/Disable-KerbPreAuth.ps1) script, which randomly selects 2 users and disables their pre-authentication.
+On the domain controller, disable pre-authentication using the [Disable-KerbPreAuth.ps1](https://github.com/davidonlinearchive/Active-Directory-Lab/blob/main/Attacks/AS-REP-Roasting/Disable-KerbPreAuth.ps1) script, which randomly selects 2 users under the "LabUsers" OU and disables their pre-authentication.
 
 ![disable-kerb-preauth](./assets/disable-kerb-preauth.png)
 
